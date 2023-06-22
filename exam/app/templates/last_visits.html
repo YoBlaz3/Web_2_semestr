@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="h-100 text-center d-flex p-3">
+    <div class="m-auto">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Жанр</th>
+                    <th scope="col">Дата издания</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <th class="book-title">{{ book.title }}</th>
+                    <th>
+                        {% for genre in book_genre %}
+                        {% if genre.books_id == book.id %}{{ genre.genre.genre_name }}</br>{% endif %}
+                        {% endfor %}
+                    </th>
+                    <th>{{ book.year }}</th>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary"
+                                href="{{ url_for('book.show', book_id=book.id) }}">Просмотр</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% from 'pagination.html' import render_pagination %}
+{% block content %}
+<div class="h-100 text-center d-flex p-3">
+    <div class="m-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Книга</th>
+                    <th scope="col">Пользователь</th>
+                    <th scope="col">Время посещения</th>
+                </tr>
+            
+            </thead>
+            <tbody>
+            {% for user_visit_book in info %}
+                {% if user_visit_book[1].title %}
+                    <tr>
+                        <th class="book-title">
+                            {{ user_visit_book[1].title }} 
+                        </th>
+                        <th>
+                            {% if user_visit_book[0].first_name %}
+                                {{ user_visit_book[0].first_name}} {{ user_visit_book[0].last_name }} {{ user_visit_book[0].middle_name or '' }}
+                            {% else %}
+                                Неавторизованный пользователь
+                            {% endif %}
+                        </th>
+                        <th>{{ user_visit_book[2] }}</th>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+            
+        </table>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
