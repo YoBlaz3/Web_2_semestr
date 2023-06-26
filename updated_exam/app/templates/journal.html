@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% from 'pagination.html' import render_pagination %}
+{% block content %}
+<div class="h-100 text-center d-flex p-3">
+    <div class="m-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Книга</th>
+                    <th scope="col">Пользователь</th>
+                    <th scope="col">Время посещения</th>
+                </tr>
+            
+            </thead>
+            <tbody>
+            {% for log in info %}
+            <tr>
+                <th class="book-title">{{ log.book_name }}</th>
+                <th class="book-title">{{ log.fio_user }}</th>
+                <th class="book-title">{{ log.created_at }}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="mb-5">
+            {{ render_pagination(pagination, request.endpoint, search_params) }}
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('journal', download_csv='True') }}">Экспорт в CSV</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% from 'pagination.html' import render_pagination %}
+{% block content %}
+<div class="h-100 text-center d-flex p-3">
+    <div class="m-auto">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Автор</th>
+                    <th scope="col">Счетчик посещений</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in allstat %}
+                <tr>
+                    <th class="book-title">{{ stat.title }}</th>
+                    <th class="book-title">{{ stat.author }}</th>
+                    <th class="book-title">{{ stat.visits_count }}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="mb-5">
+            {{ render_pagination(pagination, request.endpoint) }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
